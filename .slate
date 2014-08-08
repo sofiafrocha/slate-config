@@ -93,10 +93,10 @@ bind 1:alt;cmd grid padding:4 mon-main:6,6 mon-aux:6,6
 ####### Throw binds
 
 # Cmd+Alt+I = throws window to the left monitor (secondary)
-bind i:cmd;alt sequence throw mon-aux
+bind i:cmd;alt sequence throw 0
 
 # Cmd+Alt+I = throws window to the right monitor (primary)
-bind o:cmd;alt sequence throw mon-main
+bind o:cmd;alt sequence throw 1
 ####################################################
 
 
