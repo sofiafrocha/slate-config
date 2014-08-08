@@ -1,0 +1,108 @@
+# This is the default .slate file.
+# If no ~/.slate file exists this is the file that will be used.
+
+# Slate Config file by Sofia F. Rocha
+# https://github.com/sofiafrocha
+
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+
+
+############ Alias for monitors 
+
+alias samsung-small 1920x1080
+alias smasung-large 1920x1200
+
+alias mon-main 1
+alias mon-aux 0
+####################################################
+
+
+####### Alias
+
+# Fullscreen
+alias full move screenOriginX;screenOriginY screenSizeX;screenSizeY
+
+# Halfs
+alias lefthalf move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
+alias righthalf move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
+
+# Thirds
+alias leftmost move screenOriginX;screenOriginY screenSizeX/3*2;screenSizeY
+alias leftless move screenOriginX;screenOriginY screenSizeX/3;screenSizeY
+alias rightmost move screenOriginX+screenSizeX/3;screenOriginY screenSizeX/3*2;screenSizeY
+alias rightless move screenOriginX+screenSizeX/3*2;screenOriginY screenSizeX/3;screenSizeY
+
+# Quarters
+alias topleft corner top-left resize:screenSizeX/2;screenSizeY/2
+alias topright corner top-right resize:screenSizeX/2;screenSizeY/2
+alias bottomleft corner bottom-left resize:screenSizeX/2;screenSizeY/2
+alias bottomright corner bottom-right resize:screenSizeX/2;screenSizeY/2
+
+# Center the window
+alias center_horizontal_only move screenOriginX+(screenSizeX/2-windowSizeX/2);screenOriginY windowSizeX;windowSizeY
+alias center move screenOriginX+(screenSizeX/2-windowSizeX/2);screenOriginY+(screenSizeY/2-windowSizeY/2) windowSizeX;windowSizeY
+
+# For the minecraft server layout
+alias m-t corner bottom-left resize:screenSizeX/3;screenSizeY/3*2
+alias m-l corner top-left resize:screenSizeX/3;screenSizeY/3
+####################################################
+
+
+
+####### Layouts
+
+# Minecraft Server Layout, terminal on the left bottom, hamachi in the left top
+layout minecraft 'Terminal' ${m-t}
+layout minecraft 'LogMeIn Hamachi' ${m-l}
+
+# Brackets and Chrome
+layout htmlexperimental 'Brackets' ${leftmost}
+layout htmlexperimental 'Google Chrome' ${rightless}
+####################################################
+
+
+
+####### Main binds
+
+# Cmd+Alt+F = full screen
+bind f:alt;cmd ${full}
+
+# Cmd+Alt+right arrow = cycles between right half of the screen, third and two thirds
+bind right:alt;cmd chain  ${righthalf} | ${rightless} | ${rightmost}
+
+# Cmd+Alt+left arrow = cycles between left half of the screen, third and two thirds
+bind left:alt;cmd chain ${lefthalf} | ${leftless} | ${leftmost}
+
+# Cmd+Alt+C = centers window, horizontaly and verticaly
+bind c:alt;cmd ${center}
+
+# Cmd+Alt+M = activates the minecraft server layout
+bind m:alt;cmd layout minecraft
+
+# Cmd+Alt+M = activates the htmlexperimental layout
+bind b:alt;cmd layout htmlexperimental
+
+# Cmd+Alt+1 = shows the grid (like Divvy), 6x6, on both monitors
+bind 1:alt;cmd grid padding:4 mon-main:6,6 mon-aux:6,6
+####################################################
+
+
+
+####### Throw binds
+
+# Cmd+Alt+I = throws window to the left monitor (secondary)
+bind i:cmd;alt sequence throw mon-aux
+
+# Cmd+Alt+I = throws window to the right monitor (primary)
+bind o:cmd;alt sequence throw mon-main
+####################################################
+
+
+
+####### Window binds
+
+# Cmd+Esc = shows window hints (like Vimperator) 
+bind esc:cmd hint
+#####################################################
